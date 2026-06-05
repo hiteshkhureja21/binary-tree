@@ -1,0 +1,16 @@
+//for height
+int height(Node*root){
+    if(root == NULL) return 0;
+    int left1 = height(root->left);
+    int right2 = height(root->right);
+    return max(left1,right2) + 1;
+}
+
+//for diameter
+int diameter(Node*root){
+    if(root == NULL) return 0;
+    int l = diameter(root->left);
+    int r = diameter(root->right);
+    int curr = height(root->left) + height(root->right);
+    return max(curr,max(l,r));
+}
