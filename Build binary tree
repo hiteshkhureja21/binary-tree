@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <map>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node*left;
+    Node*right;
+    Node(int d){
+        data = d;
+        left = right = NULL;
+    }
+};
+//   #   if we compare tree then use this
+
+Node* built(vector<int>&preorder,int &idx){
+    //without user input
+    idx++;
+    if(preorder[idx] == -1) return NULL;
+    Node*root = new Node(preorder[idx]);
+    root->left = built(preorder,idx);
+    root->right = built(preorder,idx);
+    return root;
+}
+
+// # use this 
+static int idx = -1';
+Node* built(vector<int>&preorder){
+    //without user input
+    idx++;
+    if(preorder[idx] == -1) return NULL;
+    Node*root = new Node(preorder[idx]);
+    root->left = built(preorder);
+    root->right = built(preorder);
+    return root;
+}
+
+//for input from user
+
+Node*build(Node*root){
+    int data;
+    cout<<"enter the value of data: "<<endl;
+    cin>>data;
+    if(data == -1) return NULL;
+    root = new Node(data);
+    cout<<"enter the value inserted in left for data "<<data<<endl;
+    root->left=build(root->left);
+    cout<<"enter the value inserted in right for data "<<data<<endl;
+    root->right = build(root->right);
+
+    return root;
+}
