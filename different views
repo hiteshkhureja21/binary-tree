@@ -1,0 +1,86 @@
+//TOP VIEW OF A BINARY TREE
+void topview(Node*root){
+    queue<pair<Node*,int>>q;
+    map<int,int>m;
+    q.push({root,0});
+    while(!q.empty()){
+        pair<Node*,int>temp = q.front();
+        Node*curr = temp.first;
+        int currHd = temp.second;
+        q.pop();
+        if(m.find(currHd) == m.end()){
+            m[currHd] = curr->data;
+        }
+        if(curr->left){
+            q.push({curr->left,currHd-1});
+        }
+        if(curr->right){
+            q.push({curr->right,currHd+1});
+        }
+    }
+    for(auto it : m){
+        cout<<it.second<<" ";
+    }cout<<endl;
+}
+//BOTTOM VIEW IF BINARY TREE ,The only difference is we update m[currHD] with new value
+void bottomview(Node*root){
+    queue<pair<Node*,int>>q;
+    map<int,int>m;
+    q.push({root,0});
+    while(!q.empty()){
+        pair<Node*,int>temp = q.front();
+        Node*curr = temp.first;
+        int currHd = temp.second;
+        q.pop();
+        m[currHd] = curr->data;
+        if(curr->left){
+            q.push({curr->left,currHd-1});
+        }
+        if(curr->right){
+            q.push({curr->right,currHd+1});
+        }
+    }
+    for(auto it : m){
+        cout<<it.second<<" ";
+    }cout<<endl;
+}
+void leftview(Node*root){
+    queue<Node*>q;
+    q.push(root);
+    while(!q.empty()){
+        int size = q.size();
+        for(int i = 0;i<size;i++){
+            Node*curr = q.front();
+            q.pop();
+            if(i == 0){
+                cout<<curr->data<<" ";
+            }
+            if(curr->left){
+                q.push(curr->left);
+            }
+            if(curr->right){
+                q.push(curr->right);
+            }
+        }
+    }
+}
+void rightview(Node*root){
+    queue<Node*>q;
+    q.push(root);
+    while(!q.empty()){
+        int size = q.size();
+        for(int i = 0;i<size;i++){
+            Node*curr = q.front();
+            q.pop();
+            if(i == size-1){ // this is the differnce between right ad left view
+                cout<<curr->data<<" ";
+            }
+            if(curr->left){
+                q.push(curr->left);
+            }
+            if(curr->right){
+                q.push(curr->right);
+            }
+        }
+    }
+}
