@@ -1,0 +1,14 @@
+// for count how many nodes are present in a binary tree
+int count(Node*root){
+    if(root == NULL) return 0;
+    int left1 = count(root->left);
+    int right1 = count(root->right);
+    return left1+right1+1;
+}
+// to calculate the sum for nodes present in a binary tree
+int sumofnodes(Node*root){
+    if(root == NULL) return 0;
+    int left1 = sumofnodes(root->left);
+    int right1 = sumofnodes(root->right);
+    return left1 + right1 + root->data;
+}
