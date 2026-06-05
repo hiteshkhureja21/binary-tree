@@ -1,0 +1,19 @@
+// to check trees are identical or not
+bool isidentical(Node*p,Node*q){
+    if(p == NULL || q == NULL){
+        return p == q;
+    }
+    bool isleft = isidentical(p->left,q->left);
+    bool isright = isidentical(p->right,q->right);
+    return isleft && isright && p->data == q->data;
+}
+//to check is tree (root) is a subtree of a another tree (subroot)
+bool issubtree(Node*root,Node*subroot){
+    if(root == NULL || subroot == NULL){
+        return root == subroot;
+    }
+    if(root->data == subroot->data && isidentical(root,subroot)){
+        return true;
+    }
+    return issubtree(root->left,subroot) || issubtree(root->right,subroot);
+}
