@@ -1,0 +1,68 @@
+void inorder(Node*root){
+    if(root == NULL) return;
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
+void preorder(Node*root){
+    if(root == NULL) return ;
+    cout<<root->data<<" ";
+    preorder(root->left);
+    preorder(root->right);
+}
+void postorder(Node*root){
+    if(root == NULL) return;
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->data<<" ";
+}
+void levelorder(Node*root){
+    queue<Node*>q;
+    q.push(root);
+    q.push(NULL);
+
+    while(!q.empty()){
+        Node*fro = q.front();
+        q.pop();
+        if(fro == NULL){
+            cout<<endl;
+            if(!q.empty()){
+                q.push(NULL);
+            }
+        }else{
+            cout<<fro->data<<" ";
+            if(fro->left){
+                q.push(fro->left);
+            }if(fro->right){
+                q.push(fro->right);
+            }
+        }
+    }
+}
+void buildFromLevelOrder(Node* &root){
+    queue<Node*>q;
+    int data;
+    cout<<"enter the value for data: "<<endl;
+    cin>>data;
+    root = new Node(data);
+    q.push(root);
+    while(!q.empty()){
+        Node *temp = q.front();
+        q.pop();
+        int templeft;
+        cout<<"enter the value for inserting in left" <<endl;
+         cin>>templeft;   
+        if(templeft !=-1){
+            temp->left = new Node(templeft);
+            q.push(temp->left);
+        }
+        int tempright ;
+        cout<<"enter the value for inserting in right"<<endl;
+        cin>>tempright;
+        
+        if(tempright!=-1){
+            temp->right = new Node(tempright);
+            q.push(temp->right);
+        }
+    }
+}
