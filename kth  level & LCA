@@ -1,0 +1,28 @@
+//Kth level traversal
+void kthlevel(Node*root,int k){
+    if(root == NULL) return ;
+    if(k == 1) {
+        cout<<root->data<<" ";
+        return;
+    }
+    kthlevel(root->left,k-1);
+    kthlevel(root->right,k-1);
+}
+//LCA
+Node*LCA(Node*root, Node*p ,Node*q){
+    if(root == NULL){
+        return root;
+    }
+    if(root->data == p->data || root->data == q->data){
+        return root;
+    }
+    Node*l = LCA(root->left,p,q);
+    Node*r = LCA(root->right,p,q);
+    if(l && r){
+        return root;
+    }else if(l != NULL){
+        return l;
+    }else{
+        return r;
+    }
+}
